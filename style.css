@@ -1,0 +1,27 @@
+.menu{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+.menu-context{
+    width: 20%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.menu-context-option{
+    width: 100%;
+    height: 60px;
+    background-color: indianred;
+    margin: 10px;
+    margin-left: 0;
+}
+.wheel{
+    height: 800px;
+    width: 800px;
+    border-radius: 50%;
+    background-color: lime;
+}
