@@ -33,7 +33,7 @@ button{
 }
 .wheel-part{
     transform: rotateZ(45deg);
-    transform-origin: 0 36%;
+    transform-origin: 0 0;
 }
 svg{
     transform-origin: 50% 50%;
