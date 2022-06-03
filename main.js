@@ -47,4 +47,3 @@ WHEEL.insertAdjacentHTML(
     />
   </svg>`
 );
-

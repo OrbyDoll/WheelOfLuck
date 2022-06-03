@@ -39,3 +39,14 @@ svg{
     transform-origin: 50% 50%;
     overflow: visible !important;
 }
+.arrow{
+    display: flex;
+    margin: auto;
+    margin-bottom: 0;
+    transform: rotate(180deg);
+}
+.wheel-section{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
