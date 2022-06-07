@@ -4,17 +4,24 @@ const WHEELSVG = document.querySelector(".wheel");
 const STARTBTN = document.querySelector(".startBtn");
 const ADDOPTION = document.querySelector(".addOption");
 function generateColor() {
-    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 function createWheel() {
-  let degres = 1;
+    var degres = 0;
     for (let i = 0; i < PARTSNUMBER.length; i++) {
         let color = generateColor();
         PARTSNUMBER[i].style.backgroundColor = color;
-        WHEELSVG.insertAdjacentHTML("beforeend",`<path
+        WHEELSVG.insertAdjacentHTML(
+            "beforeend",
+            `<path
       fill=${color}
       style = "transform: rotateZ(${(i + 1) * 90}deg);"
       class="wheel-part"
@@ -22,17 +29,30 @@ function createWheel() {
       stroke="black"
       stroke-width="2"
       />`
-      );
+        );
     }
     STARTBTN.addEventListener("click", () => {
-      console.log(1);
-        let rotation = setInterval(() => {
-            WHEEL.style.transform = `rotateZ(${degres}deg)`;
-            degres++;
-            if (degres == getRandomInt(300,3000)) {
-                clearInterval(rotation);
-            }
-        }, 1);
+        WHEEL.style.transform = `rotateZ(0deg)`;
+        degres = 0;
+        setTimeout(() => {
+            var rotDeg = getRandomInt(300, 3000);
+            let rotation = setInterval(() => {
+                WHEEL.style.transform = `rotateZ(${degres}deg)`;
+                degres++;
+                if (degres == rotDeg) {
+                    clearInterval(rotation);
+                    let partsNumber = PARTSNUMBER.length;
+                    let turnoversNumber = degres / (360 / partsNumber);
+                    let sectionNumber = turnoversNumber % partsNumber;
+                    console.log(sectionNumber);
+                    for (let i = 0; i < partsNumber+1; i++) {
+                        if (sectionNumber > i - 1&& sectionNumber < i) {
+                            console.log(i);
+                        }
+                    }
+                }
+            }, 1);
+        }, 200);
     });
 }
 createWheel();
