@@ -13,13 +13,14 @@
     margin-left: 10px;
 }
 .menu-context-option{
-    width: 100%;
+    width: 95%;
     height: 60px;
-    /* background-color: indianred; */
     margin: 10px;
     margin-left: 0;
     border-radius: 10px;
     border: 0;
+    padding-left: 10px;
+    border: 0.5px solid black;
 }
 .wheelDiv{
     height: 800px;
@@ -31,12 +32,7 @@
 button{
     height: 30px;
     width: 150px;
-    margin: 10px 0px;
-}
-.wheel-part{
-    transform-origin: 0 0;
-    transform: scaleZ(0.5);
-
+    margin: 10px auto;
 }
 svg{
     transform-origin: 50% 50%;
@@ -53,3 +49,4 @@ svg{
     flex-direction: column;
     margin: auto;
 }
+
