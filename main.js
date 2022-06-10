@@ -1,8 +1,9 @@
 const WHEEL = document.querySelector(".wheelDiv");
-const PARTSNUMBER = document.querySelectorAll(".menu-context-option");
 const WHEELSVG = document.querySelector(".wheel");
 const STARTBTN = document.querySelector(".startBtn");
 const ADDOPTION = document.querySelector(".addOption");
+const DELOPTION = document.querySelector(".delOption");
+const MENU = document.querySelector(".menu-context");
 function generateColor() {
   let letters = "0123456789ABCDEF";
   let color = "#";
@@ -15,12 +16,11 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 function createWheel() {
-  let degres = 0;
+  const PARTSNUMBER = document.querySelectorAll(".menu-context-option");
   for (var i = 0; i < PARTSNUMBER.length; i++) {
     let color = generateColor();
     PARTSNUMBER[i].style.backgroundColor = color;
     // PARTSNUMBER[i].value = i + 1;
-    console.log(typeof PARTSNUMBER.length);
     switch (PARTSNUMBER.length) {
       case 2:
         WHEELSVG.style.transform = "rotate(90deg)";
@@ -57,8 +57,9 @@ function createWheel() {
         break;
       case 4:
         WHEELSVG.setAttribute("viewBox", "-400 -400 800 800");
-
-        "beforeend",
+        WHEELSVG.style.transform = "rotate(0deg)";
+        WHEELSVG.insertAdjacentHTML(
+          "beforeend",
           `<path
           fill=${color}
           style = "transform: rotateZ(${
@@ -67,7 +68,8 @@ function createWheel() {
           d="M400 0C400 52.5287 389.654 104.543 369.552 153.073C349.45 201.604 319.986 245.699 282.843 282.843C245.699 319.986 201.604 349.45 153.073 369.552C104.543 389.654 52.5287 400 -1.74846e-05 400L0 0H400Z"
           stroke="black"
           stroke-width="2"
-          />`;
+          />`
+        );
         break;
       case 5:
         WHEELSVG.style.transform = "rotate(18deg)";
@@ -84,31 +86,62 @@ function createWheel() {
           />`
         );
         break;
+      case 6:
+
+        break;
+      case 7:
+
+        break;
+      case 8:
+
+        break;
+      case 9:
+
+        break;
+      case 10:
+        
+        break;
     }
   }
+}
+function wheelOptions() {
+  ADDOPTION.addEventListener("click", () => {
+    WHEELSVG.innerHTML = "";
+    MENU.insertAdjacentHTML(
+      "afterbegin",
+      `<input type="text" class="menu-context-option"></input>`
+    );
+    createWheel(); // Что-то надо делать с этой ******
+  });
+  DELOPTION.addEventListener("click", () => {
+    const PARTSNUMBER1 = document.querySelectorAll(".menu-context-option");
+    WHEELSVG.innerHTML = "";
+    PARTSNUMBER1[0].remove();
+    createWheel();
+  });
   STARTBTN.addEventListener("click", () => {
+    const PARTSNUMBER1 = document.querySelectorAll(".menu-context-option");
+    let degres = 0;
     WHEEL.style.transform = `rotate(0deg) scale(1,-1)`;
-    degres = 0;
     let degresBlock = getRandomInt(300, 3000);
-    setTimeout(() => {
-      let rotation = setInterval(() => {
-        WHEEL.style.transform = `rotate(${degres}deg) scale(1,-1)`;
-        degres++;
-        if (degres == degresBlock) {
-          clearInterval(rotation);
-          let sectionNumber =
-            (degres / (360 / PARTSNUMBER.length)) % PARTSNUMBER.length;
-          for (let i = 0; i < PARTSNUMBER.length + 1; i++) {
-            if (sectionNumber > i - 1 && sectionNumber < i) {
-              alert(PARTSNUMBER[i - 1].value);
-            }
+    let rotation = setInterval(() => {
+      WHEEL.style.transform = `rotate(${degres}deg) scale(1,-1)`;
+      degres++;
+      if (degres == degresBlock) {
+        clearInterval(rotation);
+        let sectionNumber =
+          (degres / (360 / PARTSNUMBER1.length)) % PARTSNUMBER1.length;
+        for (let i = 0; i < PARTSNUMBER1.length + 1; i++) {
+          if (sectionNumber > i - 1 && sectionNumber < i) {
+            alert(PARTSNUMBER1[i - 1].value);
           }
         }
-      }, 1);
-    }, 200);
+      }
+    }, 1);
   });
 }
 createWheel();
+wheelOptions();
 // WHEELSVG.insertAdjacentHTML(
 //   "beforeend",
 //   `<path
@@ -116,7 +149,7 @@ createWheel();
 //       fill=none
 //       stroke="black"
 //       stroke-width="2"
-//       style="transform:rotate(0deg);transform-origin:0 0;"      
+//       style="transform:rotate(0deg);transform-origin:0 0;"
 //     />
 //     <path
 //       d="M400 0C400 84.4717 373.258 166.775 323.607 235.114C273.956 303.453 203.944 354.319 123.607 380.423L0 0L400 0Z"
@@ -137,7 +170,7 @@ createWheel();
 //       fill=none
 //       stroke="black"
 //       stroke-width="2"
-//       style="transform:rotate(216deg);transform-origin:0 0;"      
+//       style="transform:rotate(216deg);transform-origin:0 0;"
 //     />
 //     <path
 //       d="M400 0C400 84.4717 373.258 166.775 323.607 235.114C273.956 303.453 203.944 354.319 123.607 380.423L0 0L400 0Z"
